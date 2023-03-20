@@ -1,0 +1,4 @@
+name: Haram
+version: '${project.version}'
+main: io.github.kosssst.haram.Haram
+api-version: 1.19
