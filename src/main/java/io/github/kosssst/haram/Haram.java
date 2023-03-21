@@ -6,12 +6,13 @@ public final class Haram extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        System.out.println("Haram plugin enabled");
-
+        getServer().getPluginManager().registerEvents(new EventListener(), this);
+        System.out.println("Listener enabled");
+        System.out.println("Plugin enabled");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        System.out.println("Plugin disabled");
     }
 }
