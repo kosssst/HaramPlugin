@@ -31,8 +31,11 @@ public class EventListener implements Listener {
         World nether = Bukkit.getWorld("world_nether");
         if ((mat == Material.COOKED_PORKCHOP) || (mat == Material.PORKCHOP)){
             player.teleport(new Location(nether, nether_x, nether_y, nether_z));
-            Bukkit.broadcastMessage("Haram!");
+            //Bukkit.broadcastMessage("Haram!");
+            player.sendTitle("HARAM", "", 20, 400, 20);
         }
     }
+
+
 
 }

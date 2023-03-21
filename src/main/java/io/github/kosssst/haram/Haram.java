@@ -9,7 +9,6 @@ public final class Haram extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
         saveDefaultConfig();
         getServer().getPluginManager().registerEvents(new EventListener(getConfig().getDouble("haram-tp.x"), getConfig().getDouble("haram-tp.y"), getConfig().getDouble("haram-tp.z")), this);
         System.out.println("Listener enabled");
