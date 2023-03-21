@@ -13,6 +13,16 @@ import org.bukkit.inventory.ItemStack;
 
 public class EventListener implements Listener {
 
+    private final double nether_x;
+    private final double nether_y;
+    private final double nether_z;
+
+    EventListener(double x, double y, double z){
+        nether_x = x;
+        nether_y = y;
+        nether_z = z;
+    }
+
     @EventHandler
     public void onPlayerEating(PlayerItemConsumeEvent event) {
         ItemStack food = event.getItem();
@@ -20,7 +30,7 @@ public class EventListener implements Listener {
         Player player = event.getPlayer();
         World nether = Bukkit.getWorld("world_nether");
         if ((mat == Material.COOKED_PORKCHOP) || (mat == Material.PORKCHOP)){
-            player.teleport(new Location(nether, 80.0, 42.0, -350.0));
+            player.teleport(new Location(nether, nether_x, nether_y, nether_z));
             Bukkit.broadcastMessage("Haram!");
         }
     }
