@@ -15,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class EventListener implements Listener {
 
@@ -79,12 +80,15 @@ public class EventListener implements Listener {
         File file = new File(plugin.getDataFolder(), fileName);
         YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 
-        ItemStack[] items = new ItemStack[config.getList("items").size()];
+        
+
+        ItemStack[] items = new ItemStack[Objects.requireNonNull(config.getList("inventory.contents")).size()];
         for (int i = 0; i < items.length; i++) {
-            items[i] = (ItemStack) config.getList("items").get(i);
+            items[i] = (ItemStack) Objects.requireNonNull(config.getList("inventory.contents")).get(i);
         }
 
         player.getInventory().setContents(items);
+        file.delete();
     }
 
     private void eraseInventory(Player player) {
