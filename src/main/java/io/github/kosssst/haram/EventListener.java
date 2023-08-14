@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -19,27 +20,20 @@ import java.util.Objects;
 
 public class EventListener implements Listener {
 
-    private final double nether_x;
-    private final double nether_y;
-    private final double nether_z;
-
-    EventListener(double x, double y, double z){
-        nether_x = x;
-        nether_y = y;
-        nether_z = z;
-    }
-
     @EventHandler
     public void onPlayerEating(PlayerItemConsumeEvent event) {
+        Haram plugin = Haram.getInstance();
+        FileConfiguration conf = plugin.getConfig();
         ItemStack food = event.getItem();
         Material mat = food.getType();
         Player player = event.getPlayer();
         World nether = Bukkit.getWorld("world_nether");
         if ((mat == Material.COOKED_PORKCHOP) || (mat == Material.PORKCHOP)){
+            ItemStack foodToRemove = new ItemStack(mat, 1);
+            player.getInventory().removeItem(foodToRemove);
             saveInventory(player);
             eraseInventory(player);
-            player.teleport(new Location(nether, nether_x, nether_y, nether_z));
-            //Bukkit.broadcastMessage("Haram!");
+            player.teleport(new Location(nether, conf.getDouble("haram-tp.x"), conf.getDouble("haram-tp.y"), conf.getDouble("haram-tp.z")));
             player.sendTitle("HARAM", "", 20, 400, 20);
         }
     }

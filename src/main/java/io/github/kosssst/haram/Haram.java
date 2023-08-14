@@ -1,6 +1,11 @@
 package io.github.kosssst.haram;
 
+import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Objects;
+import java.util.logging.Level;
 
 
 public final class Haram extends JavaPlugin {
@@ -10,14 +15,14 @@ public final class Haram extends JavaPlugin {
     public void onEnable() {
         instance = this;
         saveDefaultConfig();
-        getServer().getPluginManager().registerEvents(new EventListener(getConfig().getDouble("haram-tp.x"), getConfig().getDouble("haram-tp.y"), getConfig().getDouble("haram-tp.z")), this);
-        System.out.println("Listener enabled");
-        System.out.println("Plugin enabled");
+        Objects.requireNonNull(this.getCommand("haramtp")).setExecutor(new HaramTpCommand());
+        getServer().getPluginManager().registerEvents(new EventListener(), this);
+        Bukkit.getLogger().log(Level.INFO, "[Haram Plugin] Plugin enabled");
     }
 
     @Override
     public void onDisable() {
-        System.out.println("Plugin disabled");
+        Bukkit.getLogger().log(Level.INFO, "[Haram Plugin] Plugin disabled");
     }
 
     public static Haram getInstance() {

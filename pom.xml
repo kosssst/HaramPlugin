@@ -6,7 +6,7 @@
 
     <groupId>io.github.kosssst</groupId>
     <artifactId>haram</artifactId>
-    <version>1.20</version>
+    <version>1.20-1.2</version>
     <packaging>jar</packaging>
 
     <name>Haram</name>
